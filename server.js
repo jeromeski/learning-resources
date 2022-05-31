@@ -3,9 +3,16 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 const { readdirSync } = require("fs");
+const mongoose = require("mongoose");
 require("dotenv").config();
 
 const app = express();
+
+// db
+mongoose
+	.connect(process.env.DATABASE_CLOUD, { useNewUrlParser: true, useUnifiedTopology: true })
+	.then(() => console.log("DB connected"))
+	.catch((err) => console.log(err));
 
 // middlewares
 app.use(morgan("dev"));
